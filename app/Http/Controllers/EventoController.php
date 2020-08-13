@@ -18,8 +18,7 @@ class EventoController extends Controller
      */
 
 
-    public function index()
-    {
+    public function index(){
         if(Auth::check() === true){
             $eventos = DB::table('eventos AS e')
             ->join('viagems AS v', 'v.id', '=', 'e.fk_id_viagem')

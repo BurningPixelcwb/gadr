@@ -25,19 +25,22 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      
+      @can('Realizar Venda')
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Vendas</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" href="{{route('compras.index')}}">Fazer Venda</a>
-          <a class="dropdown-item" href="{{route('sub_tipo.index')}}">Exibir Vendas</a>
+          <a class="dropdown-item" href="{{route('compras.list')}}">Exibir Vendas</a>
         </div>
       </li>
-      
+      @endcan
+
+      @can('Tratar Eventos')
       <li class="nav-item active">
         <a class="nav-link" href="{{route('eventos.index')}}">Eventos <span class="sr-only">(current)</span></a>
       </li>
-
+      @endcan
+      @can('Tratar Viagens')
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tratar Viagens</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -46,10 +49,24 @@
           <a class="dropdown-item" href="{{route('tipo_viagem.index')}}">Tipo Viagem</a>
         </div>
       </li>
+      @endcan
 
+      @can('Tratar Usuários')
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tratar Usuários</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="{{route('user.index')}}">Usuários</a>
+          <a class="dropdown-item" href="{{route('role.index')}}">Papéis</a>
+          <a class="dropdown-item" href="{{route('permission.index')}}">Permissões</a>
+        </div>
+      </li>
+      @endcan
+
+      @can('Tratar Pessoas') 
       <li class="nav-item active">
         <a class="nav-link" href="{{route('pessoas.index')}}">Pessoas</a>
       </li>
+      @endcan
 
     </ul>
     <a href="{{ route('adm.logout')}}">Logout</a>

@@ -17,6 +17,9 @@ class CreateComprasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('fk_id_pessoa');
             $table->unsignedBigInteger('fk_id_evento');
+            $table->unsignedBigInteger('fk_id_vendedor');
+            $table->Integer('forma_pagamento');
+            $table->Integer('id_banco');
             $table->timestamps();
 
             $table->foreign('fk_id_evento')->references('id')->on('eventos')->onDelete('CASCADE');

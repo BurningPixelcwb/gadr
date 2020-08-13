@@ -9,6 +9,8 @@ class Compra extends Model
     protected $fillable = [
         'fk_id_evento' , 
         'fk_id_pessoa', 
-        'parcela'
+        'fk_id_vendedor', 
+        'forma_pagamento', 
+        'id_banco'
   ];
 }

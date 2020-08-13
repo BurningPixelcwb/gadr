@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Compra;
+use App\Models\Parcela;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CompraController extends Controller
 {
@@ -51,8 +53,32 @@ class CompraController extends Controller
      */
     public function store(Request $request)
     {
-        Compra::create($request->all());
-        return redirect()->route('compras.index');
+
+        $parcelas = $request->parcela;
+        $vlr_parcela = $request->valor_evento/$parcelas;
+        $status = 'A';
+        $dt_vencimento = date('Y-m-d', strtotime(str_replace('/', '-', $request->dt_vencimento_parcela)));
+        
+        $venda = Compra::create($request->all());
+               
+        for ($i = 1; $i <= $parcelas; $i++) {
+            $day = ($i-1)*30;
+            $dt_vencimento_parcela = date('Y-m-d',  strtotime($dt_vencimento . '+ ' . $day . 'day'));
+
+            $info_parcela = array(
+                'fk_id_venda' => $venda->id, 
+                'parcela_total' => $i . '/' . $parcelas, 
+                'status' => $status, 
+                'dt_vencimento_parcela' => $dt_vencimento_parcela, 
+                'dt_alteracao' => null, 
+                'vlr_parcela' => $vlr_parcela
+            
+            );
+        
+            Parcela::create($info_parcela);
+        }
+        
+        // return redirect()->route('compras.index');
     }
 
     /**
@@ -63,6 +89,8 @@ class CompraController extends Controller
      */
     public function show($id_evento)
     {
+        $user = Auth::user();
+
         $eventos = DB::table('eventos AS e')
         ->join('viagems AS v', 'v.id', '=', 'e.fk_id_viagem')
         ->join('pessoas AS p', 'p.id', '=', 'e.fk_responsavel_evento')
@@ -95,7 +123,7 @@ class CompraController extends Controller
         ->where('tipo_pessoa', '=', 1)
         ->get();
 
-        return view('compras.create')->with(['eventos' => $eventos, 'pessoas' => $pessoas]);
+        return view('compras.create')->with(['eventos' => $eventos, 'pessoas' => $pessoas, 'user' => $user]);
     }
 
     /**
@@ -131,5 +159,27 @@ class CompraController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+
+    public function list()
+    {
+        $vendas = DB::table('parcelas AS p')
+        ->join('compras as c', 'c.id', '=', 'p.fk_id_venda')
+        ->join('eventos as e', 'e.id', '=', 'c.fk_id_evento')
+        ->join('viagems as v', 'v.id', '=', 'e.fk_id_viagem')
+        ->select(
+            'p.id as id_parcela',
+            'p.fk_id_venda as id_venda',
+            'v.name',
+            'e.id as id_evento'
+
+        )
+        ->whereMonth('p.dt_vencimento_parcela', '=',  $ldate = date('m'))
+        ->groupBy('id_evento')
+        ->get();
+        
+        return view('compras.list')->with(['vendas' => $vendas]);
     }
 }
