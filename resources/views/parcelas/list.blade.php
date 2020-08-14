@@ -3,8 +3,8 @@
 @section('content')
  <div class="card bg-light mb-3 shadow-sm">
     <div class="card-header align-center">
-        <h2 class="card-title">Vendas Realizadas</h2>
-        <p class="lead small">Abaixo você confere todas as vendas que você fez.</p>
+        <h2 class="card-title">Parcelas</h2>
+        <p class="lead small">Abaixo você confere todas as parcelas do evento.</p>
     </div>
 
     <div class="card-body">
@@ -12,16 +12,17 @@
         @foreach($parcelas as $parcela)
         
         
-        <div class="col-md-4">
+        <div class="col-md-3">
                   
-            <div class="card mb-4 shadow-sm">
+            <div class="card mb-3 shadow-sm">
               
               <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>               
+              <h5 class="card-title">{{$parcela->comprador}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{$parcela->frm_pagamento}}: {{$parcela->parcela_total}} de R${{$parcela->vlr_parcela}}</h6>
+              
+              <a href="{{ route('parcelas.details', $parcela->id) }}" class="btn btn-primary">Detalhes</a>  
+              <a href="#" class="btn btn-success">Resolver</a>  
+              
 
               </div>
 

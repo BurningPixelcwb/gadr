@@ -48,6 +48,7 @@ Route::get('/vendas',        'CompraController@list')->name('compras.vendas');
 
 /****** Parcelas ******/
 Route::resource('/parcelas', 'ParcelaController', ['except' => ['destroy']])->middleware(['role_or_permission:Administrador|Vendedor']);
+Route::get('/parcelas/{id}/details/',       'ParcelaController@details')->name('parcelas.details');
 Route::get('/parcelas/{parcela}/delete', 'ParcelaController@destroy')->name('parcelas.destroy')->middleware(['role_or_permission:Administrador|Vendedor']);
 
 

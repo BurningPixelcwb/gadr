@@ -126,4 +126,8 @@ class ParcelaController extends Controller
     {
         //
     }
+
+    public function details($id){
+        dd('oi => ' . $id);
+    }
 }
