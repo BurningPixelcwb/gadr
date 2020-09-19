@@ -49,19 +49,22 @@ class ParcelaController extends Controller
     public function show($id)
     {
         $parcelas = DB::select(
-            'select
+            "select
                 p.id
                 , p.parcela_total
-                , p.status
+                , CASE
+                    WHEN p.status = 'A' THEN 'Aberto'
+                    ELSE 'Fechado'
+                  END AS status
                 , p.dt_vencimento_parcela
                 , p.vlr_parcela
                 , CASE
-                    WHEN forma_pagamento = 1 THEN "Boleto"
-                    WHEN forma_pagamento = 2 THEN "Depósito"
-                    ELSE "Cartão de crédito"
+                    WHEN forma_pagamento = 1 THEN 'Boleto'
+                    WHEN forma_pagamento = 2 THEN 'Depósito'
+                    ELSE 'Cartão de crédito'
                 end as frm_pagamento
                     
-                , concat( e.nome, " ", e.sobrenome) as comprador
+                , concat( e.nome, ' ', e.sobrenome) as comprador
                 
             from 
                 parcelas p
@@ -81,13 +84,13 @@ class ParcelaController extends Controller
                 
                 
             where
-                status = "A"
+                status = 'A'
                 
             and	
                 month(dt_vencimento_parcela) = month(now())
                 
             and
-                v.id = ' . $id
+                v.id = " . $id
         );
 
         return view('parcelas.list')->with(['parcelas' => $parcelas]);

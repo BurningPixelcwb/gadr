@@ -24,7 +24,7 @@
                         <ul class="list-group mb-3">
                             <li class="list-group-item d-flex justify-content-between lh-condensed">
                                 <div><h6 class="my-0">Guia</h6></div>
-                                <span class="text-muted">{{$evento->guia}}</span>
+                                <span class="text-muted">{{$evento->guia}}</span> 
                             </li>
 
                             <li class="list-group-item d-flex justify-content-between lh-condensed">

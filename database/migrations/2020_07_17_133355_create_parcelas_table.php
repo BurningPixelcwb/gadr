@@ -19,7 +19,7 @@ class CreateParcelasTable extends Migration
             $table->string('parcela_total');
             $table->string('status');
             $table->date('dt_vencimento_parcela');
-            $table->date('dt_alteracao');// deixar nullable
+            $table->date('dt_alteracao')->nullable();
             $table->float('vlr_parcela', 8,2);
             $table->timestamps();
 

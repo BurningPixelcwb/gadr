@@ -58,9 +58,12 @@ class CompraController extends Controller
         $vlr_parcela = $request->valor_evento/$parcelas;
         $status = 'A';
         $dt_vencimento = date('Y-m-d', strtotime(str_replace('/', '-', $request->dt_vencimento_parcela)));
+
         
+
         $venda = Compra::create($request->all());
-               
+        
+
         for ($i = 1; $i <= $parcelas; $i++) {
             $day = ($i-1)*30;
             $dt_vencimento_parcela = date('Y-m-d',  strtotime($dt_vencimento . '+ ' . $day . 'day'));
@@ -74,7 +77,6 @@ class CompraController extends Controller
                 'vlr_parcela' => $vlr_parcela
             
             );
-        
             Parcela::create($info_parcela);
         }
         

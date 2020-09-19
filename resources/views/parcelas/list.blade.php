@@ -19,9 +19,10 @@
               <div class="card-body">
               <h5 class="card-title">{{$parcela->comprador}}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{$parcela->frm_pagamento}}: {{$parcela->parcela_total}} de R${{$parcela->vlr_parcela}}</h6>
-              
-              <a href="{{ route('parcelas.details', $parcela->id) }}" class="btn btn-primary">Detalhes</a>  
-              <a href="#" class="btn btn-success">Resolver</a>  
+              <h6 class="card-subtitle mb-2 text-muted">Status da parcela: {{$parcela->status}}</h6>
+              @if ($parcela->status = 'Aberto') <a href="#" class="btn btn-success">Dar baixa</a> @else 
+              <a href="#" class="btn btn-success">Dar baixa</a>  
+              @endif
               
 
               </div>
