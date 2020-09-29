@@ -18,7 +18,7 @@
             <div class="card mb-4 shadow-sm">
               
               <div class="card-body">
-                <h5 class="card-title">{{$venda->name}}</h5>
+                <h5 class="card-title">{{$venda->viagem}}</h5>
                 <div class="d-flex justify-content-between align-items-center">
                 
                 </div>

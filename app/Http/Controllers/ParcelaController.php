@@ -49,47 +49,43 @@ class ParcelaController extends Controller
     public function show($id)
     {
         $parcelas = DB::select(
-            "select
-                p.id
+            "SELECT
+                    p.id
                 , p.parcela_total
                 , CASE
                     WHEN p.status = 'A' THEN 'Aberto'
+                    WHEN p.status = 'AT' THEN 'Atrasado'
                     ELSE 'Fechado'
-                  END AS status
+                    END AS status
                 , p.dt_vencimento_parcela
                 , p.vlr_parcela
                 , CASE
                     WHEN forma_pagamento = 1 THEN 'Boleto'
                     WHEN forma_pagamento = 2 THEN 'Depósito'
-                    ELSE 'Cartão de crédito'
-                end as frm_pagamento
+                    ELSE 'C.Crédito'
+                END AS frm_pagamento
                     
-                , concat( e.nome, ' ', e.sobrenome) as comprador
+                , CONCAT( e.nome, ' ', e.sobrenome) AS comprador
                 
-            from 
+            FROM 
                 parcelas p
                 
-                
-            inner join 
+            INNER JOIN
                 compras c
-                on c.id = p.fk_id_venda
+                ON c.id = p.fk_id_venda
                 
-            inner join
+            INNER JOIN
                 pessoas e
-                on e.id = c.fk_id_pessoa
+                ON e.id = c.fk_id_pessoa
                 
-            inner join
-                eventos as v
-                on v.id = c.fk_id_evento
+            INNER JOIN
+                eventos AS v
+                ON v.id = c.fk_id_evento
+            
+            AND
+                MONTH(dt_vencimento_parcela) = MONTH(NOW())
                 
-                
-            where
-                status = 'A'
-                
-            and	
-                month(dt_vencimento_parcela) = month(now())
-                
-            and
+            AND
                 v.id = " . $id
         );
 

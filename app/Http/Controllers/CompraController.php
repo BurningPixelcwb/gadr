@@ -32,6 +32,7 @@ class CompraController extends Controller
         ->where('e.data_inscricao_close', '>=',  DATE('Y-m-d'))
         ->orderBy('e.data_inscricao_close')
         ->get();
+        
         return view('compras.index')->with(['eventos' => $eventos]);
     }
 
@@ -124,7 +125,6 @@ class CompraController extends Controller
                 )
         ->where('tipo_pessoa', '=', 1)
         ->get();
-
         return view('compras.create')->with(['eventos' => $eventos, 'pessoas' => $pessoas, 'user' => $user]);
     }
 
@@ -167,21 +167,38 @@ class CompraController extends Controller
 
     public function list()
     {
-        $vendas = DB::table('parcelas AS p')
-        ->join('compras as c', 'c.id', '=', 'p.fk_id_venda')
-        ->join('eventos as e', 'e.id', '=', 'c.fk_id_evento')
-        ->join('viagems as v', 'v.id', '=', 'e.fk_id_viagem')
-        ->select(
-            'p.id as id_parcela',
-            'p.fk_id_venda as id_venda',
-            'v.name',
-            'e.id as id_evento'
-
-        )
-        ->whereMonth('p.dt_vencimento_parcela', '=',  $ldate = date('m'))
-        ->groupBy('id_evento')
-        ->get();
-        
+        $vendas = DB::select("SELECT 
+        viagem
+      , id_evento
+      , COUNT(*) 		AS total_parcelas
+      , SUM(aberto) 	AS aberto
+      , SUM(fechado)	AS fechado
+      , SUM(atraso) 	AS atraso
+  FROM (
+          SELECT
+                G.name AS viagem
+              , P.id AS id_parcela
+              , V.id AS id_venda
+              , E.id AS id_evento
+              , CASE WHEN status = 'A' 	AND dt_vencimento_parcela >= NOW() THEN 1 ELSE 0 END AS aberto
+              , CASE WHEN status = 'F' 	THEN 1 ELSE 0 END AS fechado
+              , CASE WHEN status = 'AT' 	THEN 1 ELSE 0 END AS atraso
+              
+          FROM 
+              compras AS V
+              
+          INNER JOIN
+              parcelas AS P
+              ON p.fk_id_venda = V.id
+              
+          INNER JOIN
+              eventos AS E
+              ON e.id = v.fk_id_evento
+  
+          INNER JOIN 
+              viagems AS G
+              ON G.id = e.fk_id_viagem
+      ) AS tp");
         return view('compras.list')->with(['vendas' => $vendas]);
     }
 }
