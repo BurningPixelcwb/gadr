@@ -14,20 +14,18 @@
         
         
         <div class="col-md-4">
-                  
-            <div class="card mb-4 shadow-sm">
-              
-              <div class="card-body">
-                <h5 class="card-title">{{$venda->viagem}}</h5>
-                <div class="d-flex justify-content-between align-items-center">
-                
-                </div>
+          <div class="card border-secondary mb-3" style="max-width: 18rem;">
+            <div class="card-header"><h5 class="card-title">{{$venda->viagem}}</h5></div>
+            <div class="card-body text-secondary">
+              <h5 class="card-title">Total de parcelas: {{$venda->total_parcelas}}</h5>
+              <p class="card-title">Abertas: {{$venda->aberto}}</p>
+              <p class="card-title">Fechadas: {{$venda->fechado}}</p>
+              <p class="card-title">Em atraso: {{$venda->atraso}}</p>
+              <div class="d-flex justify-content-between align-items-center"></div>
 
-                <a href="{{ route('parcelas.show', $venda->id_evento) }}" class="btn btn-primary">Ver parcelas</a>  
-
-              </div>
-
+              <a href="{{ route('parcelas.show', $venda->id_evento) }}" class="btn btn-primary">Ver parcelas</a>  
             </div>
+          </div>
           
         </div>
           

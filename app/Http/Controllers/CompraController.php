@@ -167,6 +167,7 @@ class CompraController extends Controller
 
     public function list()
     {
+
         $vendas = DB::select("SELECT 
         viagem
       , id_evento

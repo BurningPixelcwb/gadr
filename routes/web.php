@@ -37,7 +37,8 @@ Route::resource('/eventos', 'EventoController', ['except' => ['destroy']])->midd
 Route::get('/eventos/{evento}/delete', 'EventosController@destroy')->name('eventos.destroy')->middleware(['role_or_permission:Administrador']);
 
 /****** Pessoas ******/
-Route::resource('/pessoas', 'PessoaController', ['except' => ['destroy']])->middleware(['role_or_permission:Administrador|Vendedor']);
+/*Route::resource('/pessoas', 'PessoaController', ['except' => ['destroy']])->middleware(['role_or_permission:Administrador|Vendedor']);*/
+Route::resource('/pessoas', 'PessoaController', ['except' => ['destroy']]);
 Route::get('/pessoas/{pessoa}/delete', 'PessoaController@destroy')->name('pessoas.destroy')->middleware(['role_or_permission:Administrador|Vendedor']);
 
 /****** Compras ******/

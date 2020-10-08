@@ -16,13 +16,14 @@
         <div class="col-md-3">
                   
         @if($parcela->status == 'Aberto')
-          <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+
+          <div class="card border-info mb-3" style="max-width: 18rem;">
             <div class="card-header">{{$parcela->status}}</div>
-            <div class="card-body">
+            <div class="card-body text-info">
               <h5 class="card-title">{{$parcela->comprador}}</h5>
               <p class="card-text">{{$parcela->frm_pagamento}}: {{$parcela->parcela_total}} de R${{$parcela->vlr_parcela}}</p>
-              @if ($parcela->status = 'Aberto') <a href="#" class="btn btn-success">Dar baixa</a> @else 
-              <a href="#" class="btn btn-primary">Alterar</a>
+              <p class="card-text">Vencimento em: {{$parcela->vencimento}}</p>
+              @if ($parcela->status = 'Aberto') <a href="#" class="btn btn-primary">Detalhes</a>
               @endif
             </div>
           </div>
@@ -33,6 +34,7 @@
             <div class="card-body text-success">
             <h5 class="card-title">{{$parcela->comprador}}</h5>
               <p class="card-text">{{$parcela->frm_pagamento}}: {{$parcela->parcela_total}} de R${{$parcela->vlr_parcela}}</p>
+              <p class="card-text">Vencimento em: {{$parcela->vencimento}}</p>
               @if ($parcela->status = 'Aberto') <a href="#" class="btn btn-primary">Detalhes</a>
               @endif
             </div>
@@ -44,6 +46,7 @@
             <div class="card-body text-warning">
               <h5 class="card-title">{{$parcela->comprador}}</h5>
               <p class="card-text">{{$parcela->frm_pagamento}}: {{$parcela->parcela_total}} de R${{$parcela->vlr_parcela}}</p>
+              <p class="card-text">Vencimento em: {{$parcela->vencimento}}</p>
               @if ($parcela->status = 'Aberto') <a href="#" class="btn btn-primary">Dar baixa</a> @else 
               <a href="#" class="btn btn-success">Alterar</a>
               @endif

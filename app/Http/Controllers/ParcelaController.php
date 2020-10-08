@@ -57,7 +57,7 @@ class ParcelaController extends Controller
                     WHEN p.status = 'AT' THEN 'Atrasado'
                     ELSE 'Fechado'
                     END AS status
-                , p.dt_vencimento_parcela
+                , DATE_FORMAT(p.dt_vencimento_parcela, '%d/%m/%Y') AS vencimento
                 , p.vlr_parcela
                 , CASE
                     WHEN forma_pagamento = 1 THEN 'Boleto'
