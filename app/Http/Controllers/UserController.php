@@ -41,8 +41,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
-
         $user = new User();
         $user->name = $request->name;
         $user->sobrenome;

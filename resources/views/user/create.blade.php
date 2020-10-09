@@ -23,6 +23,7 @@
                     <label for="viagem">Nome</label>
                     <div class="input-group mb-2">
                         <input type="text" class="form-control" name="name" id="name" placeholder="Primeiro nome" maxlength="20">
+                        
                     </div>
                     
                 </div>
@@ -79,16 +80,12 @@
                     <label for="viagem">Sexo</label>
                     <div class="input-group mb-2">
 
-                        <select id="viagem" name="fk_id_viagem" class="form-control">
+                        <select id="sexo" name="sexo" class="form-control">
                             <option selected>Escolher...</option>
-                            
-                                <option value=""> Masculino</option>
-                                <option value=""> Feminino</option>
-                                <option value=""> Outros</option>
-                            
+                            <option value="">Masculino</option>
+                            <option value="">Feminino</option>
+                            <option value="">Outros</option>
                         </select>
-
-                        <input type="sexo" class="form-control" id="sexo" placeholder="Insira o email" name="sexo">
                 
                     </div>
                 </div>
@@ -120,56 +117,56 @@
                 <div class="form-group col-md-2">
                     <label for="viagem">CEP</label>
                     <div class="input-group mb-2">
-                        <input type="email" class="form-control" id="email" placeholder="Insira o email" name="cep" value="{{ old('email') }}">
+                        <input type="text" class="form-control cep" id="cep" placeholder="CEP" name="cep" value="">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="viagem">Logradouro</label>
                     <div class="input-group mb-2">
-                        <input type="email" class="form-control" id="email" placeholder="Insira o email" name="logradouro" value="{{ old('email') }}">
+                        <input type="text" class="form-control" id="logradouro" placeholder="Nome da rua" name="logradouro" value="">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-1">
                     <label for="viagem">Nº</label>
                     <div class="input-group mb-2">
-                        <input type="email" class="form-control" id="email" placeholder="Insira o email" name="numero" value="{{ old('email') }}">
+                        <input type="text" class="form-control" id="nuemero" placeholder="Número da casa" name="numero" value="">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-5">
                     <label for="viagem">Complemento</label>
                     <div class="input-group mb-2">
-                        <input type="email" class="form-control" id="email" placeholder="Insira o email" name="complemento" value="{{ old('email') }}">
+                        <input type="text" class="form-control" id="complemento" placeholder="Insira o complemento" name="complemento" value="">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="viagem">Bairro</label>
                     <div class="input-group mb-2">
-                        <input type="email" class="form-control" id="email" placeholder="Insira o email" name="bairro" value="{{ old('email') }}">
+                        <input type="text" class="form-control" id="bairro" placeholder="Insira o bairro" name="bairro" value="">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="viagem">Cidade</label>
                     <div class="input-group mb-2">
-                        <input type="email" class="form-control" id="email" placeholder="Insira o email" name="cidade" value="{{ old('email') }}">
+                        <input type="text" class="form-control" id="cidade" placeholder="Insira o cidade" name="cidade" value="">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="viagem">Estado</label>
                     <div class="input-group mb-2">
-                        <input type="email" class="form-control" id="email" placeholder="Insira o email" name="estado" value="{{ old('email') }}">
+                        <input type="text" class="form-control" id="estado" placeholder="Insira o estado" name="estado" value="">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="viagem">País</label>
                     <div class="input-group mb-2">
-                        <input type="email" class="form-control" id="email" placeholder="Insira o email" name="pais" value="{{ old('email') }}">
+                        <input type="text" class="form-control" id="pais" placeholder="Insira o país" name="pais" value="">
                 
                     </div>
                 </div>
