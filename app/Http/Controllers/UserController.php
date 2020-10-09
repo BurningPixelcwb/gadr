@@ -42,7 +42,19 @@ class UserController extends Controller
     {
         $user = new User();
         $user->name = $request->name;
+        $user->sobrenome;
+        $user->nascimento;
+        $user->rg;
+        $user->cpf;
+        $user->sexo;
         $user->email = $request->email;
+        $user->telefone;
+        $user->cep;
+        $user->logradouro;
+        $user->bairro;
+        $user->cidade;
+        $user->estado;
+        $user->pais;
         $user->password = bcrypt($request->password);
         $user->save();
 
