@@ -73,20 +73,20 @@ class EventoController extends Controller
     public function store(Request $request)
     {
         $evento = new Evento();
-        $evento->fk_id_viagem = $request->fk_id_viagem;
-        $evento->fk_responsavel_evento = $request->fk_responsavel_evento;
-        $evento->desc_evento = $request->desc_evento;
-        $evento->local_ida_evento = $request->local_ida_evento;
-        $evento->data_ida_evento = $request->data_ida_evento;
-        $evento->hora_ida_evento = $request->hora_ida_evento;
-        $evento->local_retorno_evento = $request->local_retorno_evento;
-        $evento->data_retorno_evento = $request->data_retorno_evento;
-        $evento->hora_retorno_evento = $request->hora_retorno_evento;
-        $evento->data_inscricao_close = $request->data_inscricao_close;
-        $evento->data_inscricao_open = $request->data_inscricao_open;
-        $evento->total_vagas_evento = $request->total_vagas_evento;
-        $evento->minimo_vagas_evento = $request->minimo_vagas_evento;
-        $evento->idade_minima_evento = $request->idade_minima_evento;
+        $evento->fk_id_viagem           = $request->fk_id_viagem;
+        $evento->fk_responsavel_evento  = $request->fk_responsavel_evento;
+        $evento->desc_evento            = $request->desc_evento;
+        $evento->local_ida_evento       = $request->local_ida_evento;
+        $evento->data_ida_evento        = $request->data_ida_evento;
+        $evento->hora_ida_evento        = $request->hora_ida_evento;
+        $evento->local_retorno_evento   = $request->local_retorno_evento;
+        $evento->data_retorno_evento    = $request->data_retorno_evento;
+        $evento->hora_retorno_evento    = $request->hora_retorno_evento;
+        $evento->data_inscricao_close   = $request->data_inscricao_close;
+        $evento->data_inscricao_open    = $request->data_inscricao_open;
+        $evento->total_vagas_evento     = $request->total_vagas_evento;
+        $evento->minimo_vagas_evento    = $request->minimo_vagas_evento;
+        $evento->idade_minima_evento    = $request->idade_minima_evento;
         $evento->max_parcela = $request->max_parcela;
         $evento->valor_evento = $request->valor_evento;
         $evento->save();

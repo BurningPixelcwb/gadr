@@ -14,4 +14,6 @@ class Pessoa extends Model
       , 'tipo_pessoa'
   ];
 
+
+
 }

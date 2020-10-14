@@ -42,23 +42,25 @@ class UserController extends Controller
     {
 
         $user = new User();
-        $user->name = $request->name;
-        $user->sobrenome;
-        $user->nascimento;
-        $user->rg;
-        $user->cpf;
-        $user->sexo;
-        $user->email = $request->email;
-        $user->telefone;
-        $user->cep;
-        $user->logradouro;
-        $user->bairro;
-        $user->cidade;
-        $user->estado;
-        $user->pais;
-        $user->password = bcrypt($request->password);
+        $user->name         = $request->name;
+        $user->sobrenome    = $request->sobrenome;
+        $user->nascimento   = $request->nascimento;
+        $user->rg           = $request->rg;
+        $user->cpf          = $request->cpf;
+        $user->sexo         = $request->sexo;
+        $user->email        = $request->email;
+        $user->telefone1    = $request->telefone_1;
+        $user->telefone2    = $request->telefone_2;
+        $user->cep          = $request->cep;
+        $user->logradouro   = $request->logradouro;
+        $user->numero       = $request->numero;
+        $user->bairro       = $request->bairro;
+        $user->cidade       = $request->cidade;
+        $user->estado       = $request->estado;
+        $user->pais         = $request->pais;
+        $user->password     = bcrypt($request->password);
         $user->save();
-
+        
         return redirect()->route('user.index');
         
     }
