@@ -17,6 +17,7 @@ class SubTipoController extends Controller
      */
     public function index()
     {
+        
         $subtipos = DB::table('sub_tipos as st')
         ->join('tipo_viagems as tv', 'tv.id', '=', 'st.fk_id_tipo_viagem')
         ->select(
@@ -38,6 +39,7 @@ class SubTipoController extends Controller
      */
     public function create()
     {
+        
         $tipo_viagens = TipoViagem::All();
         return view('subtipos.create')->with(['tipo_viagens' => $tipo_viagens]);
     }
@@ -51,7 +53,7 @@ class SubTipoController extends Controller
     public function store(Request $request)
     {
         SubTipo::create($request->all());
-        return redirect()->route('subtipos.index');
+        return redirect()->route('sub_tipo.index');
     }
 
     /**

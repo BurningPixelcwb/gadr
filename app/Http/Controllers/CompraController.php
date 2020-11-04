@@ -54,16 +54,22 @@ class CompraController extends Controller
      */
     public function store(Request $request)
     {
+        $data = request()->validate([
+            'fk_id_pessoa'          => 'required|min:1',
+            'forma_pagamento'       => 'required|min:1',
+            'dt_vencimento_parcela' => 'required|min:1'
+            
+        ]);
+
+        $valor_evento = str_replace(',', '.', $request->valor_evento);
 
         $parcelas = $request->parcela;
-        $vlr_parcela = $request->valor_evento/$parcelas;
+
+        $vlr_parcela = $valor_evento/$parcelas;
         $status = 'A';
         $dt_vencimento = date('Y-m-d', strtotime(str_replace('/', '-', $request->dt_vencimento_parcela)));
 
-        
-
         $venda = Compra::create($request->all());
-        
 
         for ($i = 1; $i <= $parcelas; $i++) {
             $day = ($i-1)*30;
@@ -81,7 +87,7 @@ class CompraController extends Controller
             Parcela::create($info_parcela);
         }
         
-        // return redirect()->route('compras.index');
+        return redirect()->route('compras.index');
     }
 
     /**
@@ -94,37 +100,46 @@ class CompraController extends Controller
     {
         $user = Auth::user();
 
-        $eventos = DB::table('eventos AS e')
-        ->join('viagems AS v', 'v.id', '=', 'e.fk_id_viagem')
-        ->join('pessoas AS p', 'p.id', '=', 'e.fk_responsavel_evento')
-        ->join('evento_imagems AS i', 'i.fk_id_evento', '=', 'e.id')
-        ->select(
-            'e.id',
-            'v.name as nome_evento',
-            'e.desc_evento as descricao',
-            'e.total_vagas_evento as total_vagas',
-            'e.minimo_vagas_evento as min_vagas',
-            DB::raw('DATE_FORMAT(e.data_ida_evento, "%d/%m/%Y") AS data_ida'),
-            DB::raw('DATE_FORMAT(e.data_retorno_evento, "%d/%m/%Y") AS data_volta'),
-            'e.valor_evento',
-            'e.max_parcela',
-            DB::raw('CONCAT(p.nome,  " ", p.sobrenome) as guia'),
-            'i.path AS imagem'
-            
-        )
-        ->where('e.id', '=',  $id_evento)
-        ->orderBy('e.data_inscricao_close')
-        ->get();
+        $query = 'SELECT 
+                e.id
+            , v.name 											AS nome_evento
+            , e.desc_evento 									AS descricao
+            , e.total_vagas_evento 								AS total_vagas
+            , e.minimo_vagas_evento 							AS min_vagas
+            , DATE_FORMAT(e.data_ida_evento, "%d/%m/%Y") 		AS data_ida
+            , DATE_FORMAT(e.data_retorno_evento, "%d/%m/%Y") 	AS data_volta
+            , REPLACE(e.valor_evento, ".", ",")					AS valor_evento
+            , e.max_parcela 
+            , CONCAT(p.nome, " ", p.sobrenome) 				    AS guia
+            , (e.total_vagas_evento - (SELECT count(*) FROM compras WHERE fk_id_evento = ' . $id_evento . ')) AS vagas_restantes
 
-        $pessoas = DB::table('pessoas')
+        FROM eventos AS e
+
+        INNER JOIN 
+            viagems AS v 
+            ON v.id = e.fk_id_viagem
+        INNER JOIN
+            pessoas AS p 
+            ON p.id = e.fk_responsavel_evento
+            
+        INNER JOIN 
+            evento_imagems AS i
+            ON i.fk_id_evento = e.id
+            
+        WHERE
+            e.id = ' . $id_evento;
+
+        $eventos = DB::select($query);
+
+        $pessoas = DB::table('users')
         ->select(
                      'id'
-                   , 'nome'
+                   , 'name'
                    , 'sobrenome'
-                   , 'tipo_pessoa'
                 )
-        ->where('tipo_pessoa', '=', 1)
+        
         ->get();
+
         return view('compras.create')->with(['eventos' => $eventos, 'pessoas' => $pessoas, 'user' => $user]);
     }
 
@@ -167,7 +182,6 @@ class CompraController extends Controller
 
     public function list()
     {
-
         $vendas = DB::select("SELECT 
         viagem
       , id_evento
@@ -183,7 +197,7 @@ class CompraController extends Controller
               , E.id AS id_evento
               , CASE WHEN status = 'A' 	AND dt_vencimento_parcela >= NOW() THEN 1 ELSE 0 END AS aberto
               , CASE WHEN status = 'F' 	THEN 1 ELSE 0 END AS fechado
-              , CASE WHEN status = 'AT' 	THEN 1 ELSE 0 END AS atraso
+              , CASE WHEN status = 'AT' THEN 1 ELSE 0 END AS atraso
               
           FROM 
               compras AS V
@@ -199,7 +213,8 @@ class CompraController extends Controller
           INNER JOIN 
               viagems AS G
               ON G.id = e.fk_id_viagem
-      ) AS tp");
+      ) AS tp
+  GROUP BY viagem");
         return view('compras.list')->with(['vendas' => $vendas]);
     }
 }

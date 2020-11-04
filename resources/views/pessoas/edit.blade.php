@@ -45,7 +45,7 @@
                 <div class="form-group col-md-3">
 
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="tipo_pessoa" id="cliente" value="1"@if($pessoa->tipo_pessoa == 1) checked @endif >
+                        <input class="form-check-input" type="radio" name="tipo_pessoa" id="cliente" value="1" @if($pessoa->tipo_pessoa == 1) checked @endif >
                         <label class="form-check-label" for="cliente">Cliente</label>
                     </div>
 

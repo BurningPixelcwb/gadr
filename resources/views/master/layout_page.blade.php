@@ -62,12 +62,6 @@
       </li>
       @endcan
 
-      @can('Tratar Pessoas') 
-      <li class="nav-item active">
-        <a class="nav-link" href="{{route('pessoas.index')}}">Pessoas</a>
-      </li>
-      @endcan
-
     </ul>
     <a href="{{ route('adm.logout')}}">Logout</a>
   </div>

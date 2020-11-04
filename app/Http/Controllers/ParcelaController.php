@@ -65,7 +65,7 @@ class ParcelaController extends Controller
                     ELSE 'C.Crédito'
                 END AS frm_pagamento
                     
-                , CONCAT( e.nome, ' ', e.sobrenome) AS comprador
+                , CONCAT( e.name, ' ', e.sobrenome) AS comprador
                 
             FROM 
                 parcelas p
@@ -75,7 +75,7 @@ class ParcelaController extends Controller
                 ON c.id = p.fk_id_venda
                 
             INNER JOIN
-                pessoas e
+                users e
                 ON e.id = c.fk_id_pessoa
                 
             INNER JOIN

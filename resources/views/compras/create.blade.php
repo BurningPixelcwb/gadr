@@ -29,7 +29,7 @@
 
                             <li class="list-group-item d-flex justify-content-between lh-condensed">
                                 <div><h6 class="my-0">Valor evento</h6></div>
-                                <span class="text-muted">{{$evento->valor_evento}}</span>
+                                <span class="text-muted">R$ {{$evento->valor_evento}}</span>
                             </li>
 
                             <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -55,15 +55,17 @@
                             </li>
 
                             <li class="list-group-item d-flex justify-content-between bg-light">
-                                <div class="text-success">
-                                    <h6 class="my-0">Vagas restantes</h6>
-                                </div>
-                                <span class="text-success">5</span>
-                            </li>
-
-                            <li class="list-group-item d-flex justify-content-between">
-                                <span>Total (USD)</span>
-                                <strong>$20</strong>
+                                @if($evento->vagas_restantes > 0)  
+                                    <div class="text-success">
+                                        <h6 class="my-0">Vagas restantes</h6>
+                                    </div>
+                                    <strong class="text-success">{{$evento->vagas_restantes}}</strong>
+                                @else
+                                    <div class="text-danger">
+                                        <h6 class="my-0">Vagas restantes</h6>
+                                    </div>
+                                    <strong class="text-danger">{{$evento->vagas_restantes}}</strong>
+                                @endif
                             </li>
 
                         </ul>
@@ -93,7 +95,7 @@
                                         <select id="guia" name="fk_id_pessoa" class="form-control">
                                             <option selected>Escolher...</option>
                                             @foreach ($pessoas as $pessoa)
-                                                <option value="{{ $pessoa->id }}"> {{ $pessoa->nome }} {{ $pessoa->sobrenome }}</option>
+                                                <option value="{{ $pessoa->id }}"> {{ $pessoa->name }} {{ $pessoa->sobrenome }}</option>
                                             @endforeach
 
                                         </select>
@@ -142,7 +144,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="inputState">Emissor boleto</label>
+                                <label for="inputState">Banco Responsável</label>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -190,7 +192,9 @@
                             <input type="hidden" name="fk_id_vendedor"  id="" value="{{$user->id}}">
                             <input type="hidden" name="valor_evento"    id="" value="{{$evento->valor_evento}}">
 
-                            <button class="btn btn-primary btn-lg btn-block" type="submit">Realizar venda</button>
+                            @if($evento->vagas_restantes > 0)  
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Realizar venda</button>
+                            @endif
 
                         </div>
                     </div>

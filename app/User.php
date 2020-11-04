@@ -54,7 +54,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    
     /* Métodos SET */
     public function setNascimentoAttribute($value) {
         $nascimento = explode('/', $value);

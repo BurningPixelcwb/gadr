@@ -93,4 +93,9 @@ class Evento extends Model
     return ($data_ida);
   }
 
+  public function getvalorEventoAttribute($value) {
+    $valor_evento = str_replace('.', ',', $value);
+    return ($valor_evento);
+  }
+
 }

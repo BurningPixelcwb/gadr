@@ -20,73 +20,110 @@
 
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <label for="viagem">Nome</label>
+                    <label for="name">Nome</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Primeiro nome" maxlength="20">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Primeiro nome" maxlength="20" value="{{ old('name') }}">
                         
+                        @error('name')
+                            <div class="alert alert-danger"><p>{{ $message }}</p></div>
+                        @enderror
+
                     </div>
                     
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label for="viagem">Sobrenome</label>
+                    <label for="sobrenome">Sobrenome</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" name="sobrenome" id="sobrenome" placeholder="Sobrenome" maxlength="100">
+                        <input type="text" class="form-control" name="sobrenome" id="sobrenome" placeholder="Sobrenome" maxlength="100" value="{{ old('sobrenome') }}">
+
+                        @error('sobrenome')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
                     </div>
                     
                 </div>
 
                 <div class="form-group col-md-2">
-                    <label for="viagem">Nascimento</label>
+                    <label for="nascimento">Nascimento</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control datepicker date" name="nascimento" id="nascimento" placeholder="12/06/1991">
+                        <input type="text" class="form-control datepicker date" name="nascimento" id="nascimento" placeholder="12/06/1991" value="{{ old('nascimento') }}">
+                        
+                        @error('nascimento')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
                     </div>
                     
                 </div>
 
                 <div class="form-group col-md-2">
-                    <label for="viagem">RG</label>
+                    <label for="rg">RG</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control rg" name="rg" id="rg">
+                        <input type="text" class="form-control rg" name="rg" id="rg" value="{{ old('rg') }}">
+                                  
+                        @error('rg')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
                     </div>
                     
                 </div>
 
                 <div class="form-group col-md-2">
-                    <label for="viagem">CPF</label>
+                    <label for="cpf">CPF</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control cpf" name="cpf" id="cpf">
+                        <input type="text" class="form-control cpf" name="cpf" id="cpf" value="{{ old('cpf') }}">
+                                  
+                        @error('nascimento')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
                     </div>
                     
                 </div>
 
                 <div class="form-group col-md-2">
-                    <label for="viagem">Telefone 1</label>
+                    <label for="telefone_1">Telefone 1</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control phone_with_ddd" id="telefone_1" placeholder="Telefone 1" name="telefone_1">
+                        <input type="text" class="form-control phone_with_ddd" id="telefone_1" placeholder="Telefone 1" name="telefone_1" value="{{ old('telefone_1') }}">
+                                  
+                        @error('nascimento')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
                 
                     </div>
                 </div>
 
                 <div class="form-group col-md-2">
-                    <label for="viagem">Telefone 2</label>
+                    <label for="telefone_2">Telefone 2</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control phone_with_ddd" id="telefone_2" placeholder="telefone 2" name="telefone_2">
-                
+                        <input type="text" class="form-control phone_with_ddd" id="telefone_2" placeholder="telefone 2" name="telefone_2" value="{{ old('telefone_2') }}">
+                          
+                        @error('nascimento')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
                     </div>
                 </div>
 
                 <div class="form-group col-md-2">
-                    <label for="viagem">Sexo</label>
+                    <label for="sexo">Sexo</label>
                     <div class="input-group mb-2">
 
                         <select id="sexo" name="sexo" class="form-control">
                             <option selected>Escolher...</option>
-                            <option value="">Masculino</option>
-                            <option value="">Feminino</option>
-                            <option value="">Outros</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Feminino</option>
+                            <option value="O">Outros</option>
                         </select>
-                
+                          
+                        @error('nascimento')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
                     </div>
                 </div>
 
@@ -95,18 +132,26 @@
             <h4 class="mb-3">Informações do Sistema</h4>
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="viagem">Email</label>
+                    <label for="email">Email</label>
                     <div class="input-group mb-2">
                         <input type="email" class="form-control" id="email" placeholder="Insira o email" name="email" value="{{ old('email') }}">
-                
+                          
+                        @error('nascimento')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
                     </div>
                 </div>
 
                 <div class="form-group col-md-2">
-                    <label for="viagem">Senha</label>
+                    <label for="password">Senha</label>
                     <div class="input-group mb-2">
                         <input type="password" class="form-control" id="password" placeholder="Insira o password" name="password" value="">
-                
+                          
+                        @error('nascimento')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
                     </div>
                 </div>
                 
@@ -117,56 +162,56 @@
                 <div class="form-group col-md-2">
                     <label for="viagem">CEP</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control cep" id="cep" placeholder="CEP" name="cep" value="">
+                        <input type="text" class="form-control cep" id="cep" placeholder="CEP" name="cep" value="{{ old('cep') }}">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="viagem">Logradouro</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" id="logradouro" placeholder="Nome da rua" name="logradouro" value="">
+                        <input type="text" class="form-control" id="logradouro" placeholder="Nome da rua" name="logradouro" value="{{ old('nlogradouroame') }}">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-1">
                     <label for="viagem">Nº</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" id="numero" placeholder="Número da casa" name="numero" value="">
+                        <input type="text" class="form-control" id="numero" placeholder="Número da casa" name="numero" value="{{ old('numero') }}">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-5">
                     <label for="viagem">Complemento</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" id="complemento" placeholder="Insira o complemento" name="complemento" value="">
+                        <input type="text" class="form-control" id="complemento" placeholder="Insira o complemento" name="complemento" value="{{ old('complemento') }}">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="viagem">Bairro</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" id="bairro" placeholder="Insira o bairro" name="bairro" value="">
+                        <input type="text" class="form-control" id="bairro" placeholder="Insira o bairro" name="bairro" value="{{ old('bairro') }}">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="viagem">Cidade</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" id="cidade" placeholder="Insira o cidade" name="cidade" value="">
+                        <input type="text" class="form-control" id="cidade" placeholder="Insira o cidade" name="cidade" value="{{ old('cidade') }}">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="viagem">Estado</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" id="estado" placeholder="Insira o estado" name="estado" value="">
+                        <input type="text" class="form-control" id="estado" placeholder="Insira o estado" name="estado" value="{{ old('estado') }}">
                 
                     </div>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="viagem">País</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" id="pais" placeholder="Insira o país" name="pais" value="">
+                        <input type="text" class="form-control" id="pais" placeholder="Insira o país" name="pais" value="{{ old('pais') }}">
                 
                     </div>
                 </div>

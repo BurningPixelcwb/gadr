@@ -23,7 +23,7 @@
                     <h5 class="card-title">{{$evento->nome}}</h5>
                     <p class="card-text">{{$evento->descricao}}</p>
                     <div class="d-flex justify-content-between align-items-center">
-                    <a href="{{ route('compras.show', $evento->id) }}" class="btn btn-success">Comprar</a>
+                    <a href="{{ route('compras.show', $evento->id) }}" class="btn btn-success">Vender</a>
                     </div>
                   </div>
                   <div class="card-footer">

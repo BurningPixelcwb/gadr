@@ -29,7 +29,7 @@
 
                             <li class="list-group-item d-flex justify-content-between lh-condensed">
                                 <div><h6 class="my-0">Valor evento</h6></div>
-                                <span class="text-muted">{{$evento->valor_evento}}</span>
+                                <span class="text-muted">R$ {{$evento->valor_evento}}</span>
                             </li>
 
                             <li class="list-group-item d-flex justify-content-between lh-condensed">

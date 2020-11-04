@@ -40,6 +40,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+  
+        /*$data = request()->validate([
+            'name'          => 'required|min:2',
+            'sobrenome'     => 'required|min:2',
+            'nascimento'    => 'required',
+            'rg'            => 'required|min:8',
+            'cpf'           => 'required|min:8',
+            'telefone_1'    => 'required|min:8',
+            'sexo'          => 'required|min:8',
+            'email'         => 'required|min:8',
+            'password'      => 'required|min:8'
+        ]);*/
 
         $user = new User();
         $user->name         = $request->name;
@@ -62,7 +74,6 @@ class UserController extends Controller
         $user->save();
         
         return redirect()->route('user.index');
-        
     }
 
     /**
@@ -85,7 +96,6 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('id', $id)->first();
-
         return view('user.edit', ['user' => $user]);
     }
 
@@ -100,8 +110,21 @@ class UserController extends Controller
     {
         $user = User::where('id', $id)->first();
 
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user->name         = $request->name;
+        $user->sobrenome    = $request->sobrenome;
+        $user->nascimento   = $request->nascimento;
+        $user->rg           = $request->rg;
+        $user->cpf          = $request->cpf;
+        $user->sexo         = $request->sexo;
+        $user->telefone_1   = $request->telefone_1;
+        $user->telefone_2   = $request->telefone_2;
+        $user->cep          = $request->cep;
+        $user->logradouro   = $request->logradouro;
+        $user->bairro       = $request->bairro;
+        $user->cidade       = $request->cidade;
+        $user->estado       = $request->estado;
+        $user->pais         = $request->pais;
+        
         $user->save();
 
         return redirect()->route('user.index');
